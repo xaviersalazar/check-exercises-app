@@ -1,5 +1,4 @@
 .idea
 *.iml
 node_modules/
-check-exercises-darwin-x64/
-check-exercises-darwin-x64.zip
+release-builds/
