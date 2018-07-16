@@ -2,7 +2,7 @@ $(document).ready(function () {
 
     const typed = () => {
         let typed1 = new Typed('#typed1', {
-            strings: ['enter your github name'],
+            strings: ['enter your github username'],
             typeSpeed: 75,
             backSpeed: 50,
             backDelay: 2000,
