@@ -224,6 +224,8 @@ $(document).ready(function () {
 
     typed();
 
+    // TODO: check for enter key pressed & button clicked
+
     $('#check-exercises').click(() => {
         // Check for empty input
         if ($('#repo').val() === '') {
