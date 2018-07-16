@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300|Roboto:700" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+    <link rel="stylesheet" href="assets/css/custom.css">
+
+</head>
+<body>
+
+    <!-- Entering Repo -->
+    <div class="container-fluid" id="get-repo">
+        <div class="row h-100">
+            <div class="col my-auto text-center">
+                <h1><span id="typed1"></span></h1>
+                <h6><span id="typed2"></span></h6>
+                <div class="input-group input-group-lg mt-5">
+                    <input type="text" class="form-control" id="repo">
+                </div>
+                <button type="button" class="btn btn-outline-dark rounded-0 mt-3" id="check-exercises">check my missing exercises</button>
+                <h6 class="text-center text-danger mt-5" id="empty">you didn't enter a github name</h6>
+                <h6 class="text-center text-danger" id="invalid">the github name you provided does not have a codeup-web-exercises repo</h6>
+            </div>
+        </div>
+    </div>
+
+    <!-- Missing Exercises -->
+    <div class="container-fluid" id="missing">
+        <div class="row pt-3 panel" id="html">
+            <div class="col exer-col">
+                <h1 class="text-center mb-5">html</h1>
+                <div class="row" id="html-row"></div>
+                <footer class="arrow bounce" id="arrow">
+                    <i class="fas fa-angle-double-down"></i>
+                </footer>
+            </div>
+        </div>
+        <div class="row pt-3 panel" id="css">
+            <div class="col exer-col">
+                <h1 class="text-center mb-5">css</h1>
+                <div class="row" id="css-row"></div>
+            </div>
+        </div>
+        <div class="row pt-3 panel" id="js">
+            <div class="col exer-col">
+                <h1 class="text-center mb-5">javascript</h1>
+                <div class="row" id="js-row"></div>
+            </div>
+        </div>
+        <div class="row pt-3 panel" id="java">
+            <div class="col exer-col">
+                <h1 class="text-center mb-5">java</h1>
+                <div class="row" id="java-row"></div>
+            </div>
+        </div>
+        <div class="row pt-3 panel" id="sql">
+            <div class="col exer-col">
+                <h1 class="text-center mb-5">mysql</h1>
+                <div class="row" id="sql-row"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
+    <script src="node_modules/jquery/dist/jquery.js"></script>
+    <script src="node_modules/popper.js/dist/umd/popper.js"></script>
+    <script src="node_modules/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="node_modules/scrollmagic/scrollmagic/uncompressed/ScrollMagic.js"></script>
+    <script src="node_modules/typed.js/lib/typed.js"></script>
+    <script src="assets/js/custom.js"></script>
+    <script>if (window.module) module = window.module;</script>
+
+</body>
+</html>

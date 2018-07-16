@@ -1,0 +1,22 @@
+{
+  "name": "check-exercises",
+  "version": "1.0.0",
+  "description": "check your missing codeup exercises",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "author": "Xavier Salazar",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^2.0.4"
+  },
+  "dependencies": {
+    "bootstrap": "^4.1.2",
+    "electron-packager": "^12.1.0",
+    "jquery": "^3.3.1",
+    "popper.js": "^1.14.3",
+    "scrollmagic": "^2.0.5",
+    "typed.js": "^2.0.8"
+  }
+}
