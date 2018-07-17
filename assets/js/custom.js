@@ -207,6 +207,8 @@ $(document).ready(function () {
         const rows = [$('#html'), $('#css'), $('#js'), $('#java'), $('#sql')];
         const selectors = [$('#html-row:last'), $('#css-row:last'), $('#js-row:last'), $('#java-row:last'), $('#sql-row:last')];
 
+        // TODO: check for no missing exercises
+
         // Only create div if you have missing items
         for (let ext of all) {
             if (ext.length === 0)
@@ -225,6 +227,7 @@ $(document).ready(function () {
     typed();
 
     // TODO: check for enter key pressed & button clicked
+    // TODO: output more accurate errors
 
     $('#check-exercises').click(() => {
         // Check for empty input
