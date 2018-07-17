@@ -183,10 +183,19 @@ $(document).ready(function () {
 
             // Find missing exercises
             const missing = allExercises.diff(exercises);
-            const missingByExt = [];
 
-            filter(missing, missingByExt);
-            showMissing(missingByExt);
+            // Show no missing files if not missing any, else show files
+            if (missing.length === 0) {
+                $('#get-repo').css('display', 'none');
+                $('#no-missing').css('display', 'inline-block');
+            } else {
+                $('#get-repo').css('display', 'none');
+                $('#missing').css('display', 'inline-block');
+
+                const missingByExt = [];
+                filter(missing, missingByExt);
+                showMissing(missingByExt);
+            }
         };
     };
 
@@ -206,8 +215,6 @@ $(document).ready(function () {
 
         const rows = [$('#html'), $('#css'), $('#js'), $('#java'), $('#sql')];
         const selectors = [$('#html-row:last'), $('#css-row:last'), $('#js-row:last'), $('#java-row:last'), $('#sql-row:last')];
-
-        // TODO: check for no missing exercises
 
         // Only create div if you have missing items
         for (let ext of all) {
@@ -255,8 +262,6 @@ $(document).ready(function () {
                     $('#repo').val('');
                 },
                 success: () => {
-                    $('#get-repo').css('display', 'none');
-                    $('#missing').css('display', 'inline-block');
                     getData($('#repo').val());
                 }
             });

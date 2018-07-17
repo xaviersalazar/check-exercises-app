@@ -54,8 +54,13 @@ footer {
     opacity: 0;
 }
 
-#missing {
+#missing, #no-missing {
     display: none;
+}
+
+#no-missing {
+    height: 100vh;
+    background-color: #272727;
 }
 
 /* Colors for Language (based on Github colors) */
