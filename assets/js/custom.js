@@ -91,10 +91,6 @@ $(document).ready(function () {
                 'style.css',
                 'css_selectors.html',
                 'selectors.css',
-                'css_box_model.html',
-                'box_model.css',
-                'css_positioning.html',
-                'positioning.css',
                 // css ii
                 'media-queries.html',
                 'media-queries.css',
