@@ -1,6 +1,8 @@
 # contributors guide
 
-All pull requests are welcome but they will have to be reviewed and approved first before merging to avoid more bugs or accidental merging. Also, if you find a bug or have a more efficient way to do something, open an issue and I will get back to you on it thru the comments. If it's a major change to the program, like a new feature or a styling change, you can open an issue as well, but add `Feature Proposal:` or `Styling Proposal:` to your title with a description of what you want to change or add
+All pull requests are welcome but they will have to be reviewed and approved first before merging to avoid more bugs or accidental merging. Please only work on one issue at a time until complete 
+
+If you find a bug or have a more efficient way to do something, open an issue and I will get back to you on it thru the comments. If it's a major change to the program, like a new feature or a styling change, you can open an issue as well, but add `[feat]` or `[style change]` to your title with a description of what you want to change or add
 
 # steps
 ### fork
