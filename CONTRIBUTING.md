@@ -81,4 +81,10 @@ You finally need to push your branch:
 	git push origin your-branch-name
 	
 ### submit for review
-Goto your forked repo on Github. There you will see a `Compare and pull request` button. Click that to start a pull request. Then you can add a description of your pull request and any changes you may want to mention, then click the `Create Pull Request` button. After creating the pull request, you will need a code review before you can merge to the master. This is just to ensure that your pull request can be tested and the issue you are resolving is working as expected. If it doesnt work correctly, a `Request for Changes` will be made so you can correct them. If it does work correctly, your pull request will then be approved and merged into the master. And that's it! You've successfully contributed!
+Goto your forked repo on Github. There you will see a `Compare and pull request` button. Click that to start a pull request. There you can add a description of your pull request and any changes you may want to mention, then click the `Create Pull Request` button. 
+
+After creating the pull request, you will need a code review before you can merge to the master. This is just to ensure that your request is tested and the issue you are resolving is working as expected. 
+
+If it doesnt work correctly, a `Request for Changes` will be made so you can correct them. If it does work correctly, your pull request will then be approved and merged into the master. 
+
+And that's it! You've successfully contributed!
