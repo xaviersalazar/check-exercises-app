@@ -1,9 +1,12 @@
 # check-exercises-app
 An app used to check your missing codeup assignments, built with [Electron](https://electronjs.org/)
 
+# how to use
+* [Download here](https://github.com/xaviersalazar/check-exercises-app/releases/download/1.2.1/check-exercises-darwin-x64-1.2.1.zip), and unzip
+* Run the check-exercises.app file
+* After opening the app, you'll also need to goto your *System Preferences -> Security & Privacy* then under click the *Open Anyways* button to open the app. This happens because I  don't have a certificate, yet
 
-*   [Download here](https://github.com/xaviersalazar/check-exercises-app/releases/download/1.2.1/check-exercises-darwin-x64-1.2.1.zip) and unzip
-*   Run the check-exercises.app file
-*   After opening the app, you'll also need to goto your *System Preferences -> Security & Privacy* then under click the *Open Anyways* button to open the app. This happens because I  don't have a certificate.
+# contributing
+If you've never contributed to a project before, I would recommend going [here](https://github.com/Roshanjossey/first-contributions) first, as it will guide you through your first contribution and is very similar to the flow used here
 
-**NOTICE: if the Github API is hit too many times, the app will give you an error*
+Please follow the steps [here](CONTRIBUTING.md) to contribute

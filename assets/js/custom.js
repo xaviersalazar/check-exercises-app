@@ -1,5 +1,6 @@
 $(document).ready(function () {
 
+    // Typed.js
     const typed = () => {
         let typed1 = new Typed('#typed1', {
             strings: ['enter your github username'],
@@ -10,6 +11,7 @@ $(document).ready(function () {
         });
     };
 
+    // ScrollMagic Scene
     const scrollMagic = () => {
         // Main controller for ScrollMagic
         let controller = new ScrollMagic.Controller({
@@ -229,9 +231,7 @@ $(document).ready(function () {
 
     typed();
 
-    // TODO: check for enter key pressed & button clicked
-    // TODO: output more accurate errors
-
+    // Button clicked
     $('#check-exercises').click(() => {
         // Check for empty input
         if ($('#repo').val() === '') {
