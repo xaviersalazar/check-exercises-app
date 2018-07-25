@@ -4,6 +4,8 @@ All pull requests are welcome but they will have to be reviewed and approved fir
 
 If you find a bug or have a more efficient way to do something, open an issue and I will get back to you on it thru the comments. If it's a major change to the program, like a new feature or a styling change, you can open an issue as well, but add `[feat]` or `[style change]` to your title with a description of what you want to change or add
 
+Most of the code is location in the `assets` folder. There you'll find the css and js files you mostly be working with
+
 # steps
 ### fork
 Fork this repo by clicking the `Fork` button at the top right corner. 
