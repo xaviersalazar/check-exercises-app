@@ -254,7 +254,7 @@ $(function () {
 
     typed()
 
-    // Button clicked
+    // Button clicked   
     $('#check-exercises').click( () => {
         // Check for empty input
         if ($('#repo').val() === '') {
@@ -274,7 +274,7 @@ $(function () {
             $.ajax({
                 url: `https://api.github.com/repos/${$('#repo').val()}/codeup-web-exercises/contents/`,
                 error: (res) => {
-                    console.log(res)
+                    
                     showErrorMsg(res.statusText)
                     
                     $('#errorMsg').animate({
@@ -292,4 +292,50 @@ $(function () {
             })
         }
     })
+
+
+    // Suggest creating a generalized function to bind event handlers to.
+    // Keeps the code clean and prevents DRY
+    const userNameInput = document.querySelector("#repo")
+
+    userNameInput.addEventListener("keyup", function(event) {
+            if(event.key === "Enter"){
+                console.log(userNameInput.value)
+                if (userNameInput.value === '') {
+
+                    showErrorMsg("empty")
+        
+                    $('#errorMsg').animate({
+                        opacity: 1
+                    }, 200, () => {
+                        $('#errorMsg').animate({
+                            opacity: 0
+                        }, 5000)
+                    })
+                }
+                else {
+                    // Attempt the ajax request
+                    $.ajax({
+                        url: `https://api.github.com/repos/${userNameInput.value}/codeup-web-exercises/contents/`,
+                        error: (res) => {
+                            
+                            showErrorMsg(res.statusText)
+                            
+                            $('#errorMsg').animate({
+                                opacity: 1
+                            }, 2000, () => {
+                                $('#errorMsg').animate({
+                                    opacity: 0
+                                }, 5000)
+                            })
+                            userNameInput.value
+                        },
+                        success: () => {
+                            getData(userNameInput.value)
+                        }
+                    })
+                }
+            }
+        })
+
 })
