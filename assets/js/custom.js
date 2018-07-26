@@ -300,7 +300,7 @@ $(function () {
 
     userNameInput.addEventListener("keyup", function(event) {
             if(event.key === "Enter"){
-                console.log(userNameInput.value)
+               
                 if (userNameInput.value === '') {
 
                     showErrorMsg("empty")
