@@ -232,7 +232,7 @@ $(function () {
 
     // Dynamically display error message
     function showErrorMsg(msg){
-        
+        const userName = $('#repo').val()
         const errorMessages = [
             {
                 id: 1,
@@ -241,8 +241,8 @@ $(function () {
             },
             {
                 id: 2,
-                message: "the github name you provided does not have a codeup-web-exercises repo",
-                type: "invalid"
+                message: "The Github user: "+ userName + " does not appear to have a codeup-web-exercises repo. Check your username spelling.",
+                type: "Not Found"
             }
        ]
         errorMessages.map( errMsg => {
@@ -273,7 +273,10 @@ $(function () {
             // Attempt the ajax request
             $.ajax({
                 url: `https://api.github.com/repos/${$('#repo').val()}/codeup-web-exercises/contents/`,
-                error: () => {
+                error: (res) => {
+                    console.log(res)
+                    showErrorMsg(res.statusText)
+                    
                     $('#errorMsg').animate({
                         opacity: 1
                     }, 2000, () => {
