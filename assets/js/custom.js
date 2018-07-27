@@ -244,7 +244,16 @@ exercisesBtn.addEventListener('click', function() {
     if( userNameInput.value === '' ){
         showErrorMsg("empty")
     }else {
-        getData(userNameInput.value)
+       // Attempt the ajax request
+       $.ajax({
+        url: `https://api.github.com/repos/${userNameInput.value}/codeup-web-exercises/contents/`,
+        error: (res) => {
+            showErrorMsg(res.statusText)
+        },
+        success: () => {
+            getData(userNameInput.value)
+        }
+    })
     }
 })
 
@@ -254,7 +263,16 @@ userNameInput.addEventListener("keyup", function(event) {
             showErrorMsg("empty")
         }
         else {
-            getData(userNameInput.value)
+            // Attempt the ajax request
+            $.ajax({
+                url: `https://api.github.com/repos/${userNameInput.value}/codeup-web-exercises/contents/`,
+                error: (res) => {                
+                    showErrorMsg(res.statusText)               
+                },
+                success: () => {
+                    getData(userNameInput.value)
+                }
+            })
         }
     }
 })
