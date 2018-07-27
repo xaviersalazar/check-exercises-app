@@ -1,3 +1,10 @@
+/* TOP Level Imports*/
+const electron = require('electron')
+const path = require('path')
+const $ = require('jquery')
+const ScrollMagic = require('scrollmagic')
+// const BrowserWindow = electron.remote.BrowserWindow
+const Typed = require('typed.js')
 /*
 ********************
 Global DOM variables
@@ -43,27 +50,26 @@ async function getUserExercises(githubName) {
         ] 
 
        const jsonPromises = exerciseURLs.map(async url => {
-           const response = await fetch(url)
-           console.log(response.headers.get("X-RateLimit-Remaining"))
-           return response.json()
+           
+           const response = await fetch(url).catch( err => showErrorMsg(err.statusText))
+           
+           return response
        })
-
+       console.log(response.headers.get("X-RateLimit-Remaining"))
        console.log(jsonPromises)
     } catch (error) {
-        showErrorMsg(error)
+       
     }
 }
 
  function apiStatus(response) {
      if (response.status >= 200 && response.status < 300) {
-         console.log(response.headers.get('X-RateLimit-Remaining'))
          return Promise.resolve(response)
      }else{
-         return Promise.reject(response.statusText)
+        showErrorMsg(response.statusText)
+        return Promise.reject(response.statusText)
      }
  }
-
-const responseToJSON = (response) => response.json()
 
 /*
 **************
@@ -92,7 +98,7 @@ const scrollMagic = () => {
     })
 
     // Get all panels
-    let slides = $('div.panel')
+    let slides = document.querySelectorAll('.panel')
 
     // Add panels to the controller
     for (let i=0; i<slides.length; i++) {
@@ -210,7 +216,7 @@ const showMissing = (all) => {
 
 // Display and animate error message
 function showErrorMsg(msg){
-    const userName = $('#repo').val()
+    
     const errorMessages = [
         {
             id: 1,
@@ -219,7 +225,7 @@ function showErrorMsg(msg){
         },
         {
             id: 2,
-            message: "The Github user: "+ userName + " does not appear to have a codeup-web-exercises repo. Check your username spelling.",
+            message: "The Github user: "+ userNameInput.value + " does not appear to have a codeup-web-exercises repo. Check your username spelling.",
             type: "Not Found"
         }
    ]
@@ -236,24 +242,17 @@ function showErrorMsg(msg){
 }
 
 /*
-******************
-DOM Event Handlers
-******************
+**************
+Event Handlers
+**************
 */
+
 exercisesBtn.addEventListener('click', function() {
     if( userNameInput.value === '' ){
         showErrorMsg("empty")
     }else {
        // Attempt the ajax request
-       $.ajax({
-        url: `https://api.github.com/repos/${userNameInput.value}/codeup-web-exercises/contents/`,
-        error: (res) => {
-            showErrorMsg(res.statusText)
-        },
-        success: () => {
-            getData(userNameInput.value)
-        }
-    })
+       getUserExercises(userNameInput.value)
     }
 })
 
@@ -264,15 +263,7 @@ userNameInput.addEventListener("keyup", function(event) {
         }
         else {
             // Attempt the ajax request
-            $.ajax({
-                url: `https://api.github.com/repos/${userNameInput.value}/codeup-web-exercises/contents/`,
-                error: (res) => {                
-                    showErrorMsg(res.statusText)               
-                },
-                success: () => {
-                    getData(userNameInput.value)
-                }
-            })
+            getUserExercises(userNameInput.value)
         }
     }
 })
@@ -281,4 +272,6 @@ userNameInput.addEventListener("keyup", function(event) {
 document.addEventListener("DOMContentLoaded", function() {
  
     typed()
+
+
 })
