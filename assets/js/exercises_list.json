@@ -1,0 +1,378 @@
+[
+    {
+        "html": [
+            {
+                "id": 0,
+                "name": "welcome.html"
+            },
+            {
+                "id": 1,
+                "name": "forms.html"
+            }
+        ]
+    },
+    {
+        "css_1": [
+            {
+                "id": 0,
+                "name": "style.css"
+            },
+            {
+                "id": 1,
+                "name": "css_selectors.html"
+            },
+            {
+                "id": 2,
+                "name": "selectors.css"
+            }
+        ]
+    },
+    {
+        "css_2": [
+            {
+                "id": 0,
+                "name": "media-queries.html"
+            },
+            {
+                "id": 1,
+                "name": "media-queries.css"
+            },
+            {
+                "id": 2,
+                "name": "grid-layout.html"
+            },
+            {
+                "id": 3,
+                "name": "grid-layout.css"
+            },
+            {
+                "id": 4,
+                "name": "order-pizza.html"
+            }
+        ]
+    },
+    {
+        "js": [
+            {
+                "id": 0,
+                "name": "inline_js.html"
+            },
+            {
+                "id": 1,
+                "name": "inline_js.html"
+            },
+            {
+                "id": 2,
+                "name": "external_js.html"
+            },
+            {
+                "id": 3,
+                "name": "external.js"
+            },
+            {
+                "id": 4,
+                "name": "functions_js.html"
+            },
+            {
+                "id": 5,
+                "name": "functions.js"
+            },
+            {
+                "id": 6,
+                "name": "conditionals.html"
+            },
+            {
+                "id": 7,
+                "name": "conditionals.js"
+            },
+            {
+                "id": 8,
+                "name": "loops.html"
+            },
+            {
+                "id": 9,
+                "name": "while.js"
+            },
+            {
+                "id": 10,
+                "name": "for_loops.js"
+            },
+            {
+                "id": 11,
+                "name": "break_and_continue.js"
+            }
+        ]
+    },
+    {
+        "js_arrays": [
+            {
+                "id": 0,
+                "name": "iterating_arrays_js.html"
+            },
+            {
+                "id": 1,
+                "name": "iterating.js"
+            },
+            {
+                "id": 2,
+                "name": "planets-js.html"
+            },
+            {
+                "id": 3,
+                "name": "planets-array.js"
+            },
+            {
+                "id": 4,
+                "name": "split-join.html"
+            },
+            {
+                "id": 5,
+                "name": "planets-string.js"
+            }
+        ]
+    },
+    {
+        "js_objects": [
+            {
+                "id": 0,
+                "name": "objects.html"
+            },
+            {
+                "id": 1,
+                "name": "objects.js"
+            },
+            {
+                "id": 2,
+                "name": "math-js.html"
+            },
+            {
+                "id": 3,
+                "name": "circle.js"
+            }
+        ]
+    },
+    {
+        "bom_dom": [
+            {
+                "id": 0,
+                "name": "defuse-the-bom.html"
+            },
+            {
+                "id": 1,
+                "name": "dom-query-js.html"
+            },
+            {
+                "id": 2,
+                "name": "google_maps_api.html"
+            }
+        ]
+    },
+    {
+        "jquery": [
+            {
+                "id": 0,
+                "name": "jquery_exercises.html"
+            },
+            {
+                "id": 1,
+                "name": "konami.html"
+            },
+            {
+                "id": 2,
+                "name": "jquery_faq.html"
+            }
+        ]
+    },
+    {
+        "ajax": [
+            {
+                "id": 0,
+                "name": "ajax-store.html"
+            },
+            {
+                "id": 1,
+                "name": "inventory.json"
+            },
+            {
+                "id": 2,
+                "name": "ajax-blog.html"
+            },
+            {
+                "id": 3,
+                "name": "blog.json"
+            },
+            {
+                "id": 4,
+                "name": "weather_map.html"
+            }
+        ]
+    },
+    {
+        "js_two": [
+            {
+                "id": 0,
+                "name": "es6.js"
+            },
+            {
+                "id": 1,
+                "name": "map-filter-reduce.js"
+            },
+            {
+                "id": 2,
+                "name": "promises.js"
+            }
+        ]
+    },
+    {
+        "java_1": [
+            {
+                "id": 0,
+                "name": "HelloWorld.java"
+            },
+            {
+                "id": 1,
+                "name": "ConsoleExercises.java"
+            },
+            {
+                "id": 2,
+                "name": "ControlFlowExercises.java"
+            },
+            {
+                "id": 3,
+                "name": "StringExercise.java"
+            },
+            {
+                "id": 4,
+                "name": "MethodsExercises.java"
+            },
+            {
+                "id": 5,
+                "name": "HighLow.java"
+            }
+        ]
+    },
+    {
+        "java_2": [
+            {
+                "id": 0,
+                "name": "Person.java"
+            },
+            {
+                "id": 1,
+                "name": "Input.java"
+            },
+            {
+                "id": 2,
+                "name": "Circle.java"
+            },
+            {
+                "id": 3,
+                "name": "CircleApp.java"
+            },
+            {
+                "id": 4,
+                "name": "ServerNameGenerator.java"
+            },
+            {
+                "id": 5,
+                "name": "Movie.java"
+            },
+            {
+                "id": 6,
+                "name": "MoviesArray.java"
+            },
+            {
+                "id": 7,
+                "name": "MoviesApplication.java"
+            },
+            {
+                "id": 8,
+                "name": "Rectangle.java"
+            },
+            {
+                "id": 9,
+                "name": "Square.java"
+            },
+            {
+                "id": 10,
+                "name": "ShapesTest.java"
+            },
+            {
+                "id": 11,
+                "name": "Shape.java"
+            },
+            {
+                "id": 12,
+                "name": "Measurable.java"
+            },
+            {
+                "id": 13,
+                "name": "Quadrilateral.java"
+            },
+            {
+                "id": 14,
+                "name": "Student.java"
+            },
+            {
+                "id": 15,
+                "name": "GradesApplication.java"
+            }
+        ]
+    },
+    {
+        "sql": [
+            {
+                "id": 0,
+                "name": "albums_migration.sql"
+            },
+            {
+                "id": 1,
+                "name": "albums_seeder.sql"
+            },
+            {
+                "id": 2,
+                "name": "aliases_exercises.sql"
+            },
+            {
+                "id": 3,
+                "name": "delete_exercises.sql"
+            },
+            {
+                "id": 4,
+                "name": "functions_exercises.sql"
+            },
+            {
+                "id": 5,
+                "name": "group_by_exercises.sql"
+            },
+            {
+                "id": 6,
+                "name": "join_exercises.sql"
+            },
+            {
+                "id": 7,
+                "name": "limit_exercises.sql"
+            },
+            {
+                "id": 8,
+                "name": "order_by_exercises.sql"
+            },
+            {
+                "id": 9,
+                "name": "select_exercises.sql"
+            },
+            {
+                "id": 10,
+                "name": "subqueries_exercises.sql"
+            },
+            {
+                "id": 11,
+                "name": "update_exercises.sql"
+            },
+            {
+                "id": 12,
+                "name": "where_exercises.sql"
+            }
+        ]
+    }
+]
