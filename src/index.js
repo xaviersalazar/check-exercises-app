@@ -3,7 +3,7 @@ const electron = require('electron')
 const path = require('path')
 const $ = require('jquery')
 const ScrollMagic = require('scrollmagic')
-// const BrowserWindow = electron.remote.BrowserWindow
+const BrowserWindow = electron.remote.BrowserWindow
 const Typed = require('typed.js')
 /*
 ********************
@@ -51,9 +51,9 @@ async function getUserExercises(githubName) {
 
        const jsonPromises = exerciseURLs.map(async url => {
            
-           const response = await fetch(url).catch( err => showErrorMsg(err.statusText))
+           const studentRepos = await fetch(url).catch( err => showErrorMsg(err.statusText))
            
-           return response
+           return await Promise.all(studentRepos)
        })
        console.log(response.headers.get("X-RateLimit-Remaining"))
        console.log(jsonPromises)
