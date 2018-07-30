@@ -3,8 +3,9 @@ const electron = require('electron')
 const path = require('path')
 const $ = require('jquery')
 const ScrollMagic = require('scrollmagic')
-const BrowserWindow = electron.remote.BrowserWindow
+// const BrowserWindow = electron.remote.BrowserWindow
 const Typed = require('typed.js')
+const masterClassList = require('../assets/js/exercises_list.json')
 /*
 ********************
 Global DOM variables
@@ -41,35 +42,27 @@ API Helper Functions
 ********************
 */
 async function getUserExercises(githubName) {
-    try {
-        const exerciseURLs = [
-            `https://api.github.com/repos/${githubName}/codeup-web-exercises/contents/`,
-            `https://api.github.com/repos/${githubName}/codeup-web-exercises/contents/css/`,
-            `https://api.github.com/repos/${githubName}/codeup-web-exercises/contents/js/`,
-            `https://api.github.com/repos/${githubName}/codeup-java-exercises/contents/`,
-        ] 
-
-       const jsonPromises = exerciseURLs.map(async url => {
-           
-           const studentRepos = await fetch(url).catch( err => showErrorMsg(err.statusText))
-           
-           return await Promise.all(studentRepos)
-       })
-       console.log(response.headers.get("X-RateLimit-Remaining"))
-       console.log(jsonPromises)
-    } catch (error) {
-       
-    }
+    const exerciseURLs = [
+        `https://api.github.com/repos/${githubName}/codeup-web-exercises/contents/`,
+        `https://api.github.com/repos/${githubName}/codeup-web-exercises/contents/css/`,
+        `https://api.github.com/repos/${githubName}/codeup-web-exercises/contents/js/`,
+        `https://api.github.com/repos/${githubName}/codeup-java-exercises/contents/`,
+    ]
+     
+        const exerciseRepos = await Promise.all(exerciseURLs.map(
+            async url => {
+                let response = await fetch(url)
+                if(response.status == 200) {
+                    return await response.json()
+                }else{
+                    showErrorMsg(response.statusText)
+                }
+            }
+        ))
+       const data = exerciseRepos.map( repo => repo.map( file => ({name: file.name, path: file.path}) ))
+       console.log(data)
 }
 
- function apiStatus(response) {
-     if (response.status >= 200 && response.status < 300) {
-         return Promise.resolve(response)
-     }else{
-        showErrorMsg(response.statusText)
-        return Promise.reject(response.statusText)
-     }
- }
 
 /*
 **************
@@ -101,12 +94,12 @@ const scrollMagic = () => {
     let slides = document.querySelectorAll('.panel')
 
     // Add panels to the controller
-    for (let i=0; i<slides.length; i++) {
+    for (let slide of slides) {
         new ScrollMagic.Scene({
-            triggerElement: slides[i]
+            triggerElement: slide
         })
-            .setPin(slides[i])
-            .addTo(controller)
+        .setPin(slide)
+        .addTo(controller)
     }
 }
 
@@ -241,12 +234,10 @@ function showErrorMsg(msg){
     })
 }
 
-/*
-**************
+window.addEventListener("load", function() {
+ /***************
 Event Handlers
-**************
-*/
-
+***************/
 exercisesBtn.addEventListener('click', function() {
     if( userNameInput.value === '' ){
         showErrorMsg("empty")
@@ -267,10 +258,8 @@ userNameInput.addEventListener("keyup", function(event) {
         }
     }
 })
+// ********************************************************
 
-
-document.addEventListener("DOMContentLoaded", function() {
- 
     typed()
 
 

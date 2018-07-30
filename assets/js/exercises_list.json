@@ -1,377 +1,458 @@
-[
-    {
-        "html": [
-            {
+[{
+        "category": "html",
+        "files": [{
                 "id": 0,
-                "name": "welcome.html"
+                "fileName": "welcome",
+                "extension": ".html"
             },
             {
                 "id": 1,
-                "name": "forms.html"
+                "fileName": "forms",
+                "extension": ".html"
             }
         ]
     },
     {
-        "css_1": [
-            {
+        "category": "css_1",
+        "files": [{
                 "id": 0,
-                "name": "style.css"
+                "fileName": "style",
+                "extension": ".css"
+
             },
             {
                 "id": 1,
-                "name": "css_selectors.html"
+                "fileName": "css_selectors",
+                "extension": ".html"
             },
             {
                 "id": 2,
-                "name": "selectors.css"
+                "fileName": "selectors",
+                "extension": ".css"
             }
         ]
     },
     {
-        "css_2": [
-            {
+        "category": "css_2",
+        "files": [{
                 "id": 0,
-                "name": "media-queries.html"
+                "fileName": "media-queries",
+                "extension": ".html"
             },
             {
                 "id": 1,
-                "name": "media-queries.css"
+                "fileName": "media-queries",
+                "extension": ".css"
             },
             {
                 "id": 2,
-                "name": "grid-layout.html"
+                "fileName": "grid-layout",
+                "extension": ".html"
             },
             {
                 "id": 3,
-                "name": "grid-layout.css"
+                "fileName": "grid-layout",
+                "extension": ".css"
             },
             {
                 "id": 4,
-                "name": "order-pizza.html"
+                "fileName": "order-pizza",
+                "extension": ".html"
             }
         ]
     },
     {
-        "js": [
-            {
+        "category": "js",
+        "files": [{
                 "id": 0,
-                "name": "inline_js.html"
+                "fileName": "inline_js",
+                "extension": ".html"
             },
             {
                 "id": 1,
-                "name": "inline_js.html"
+                "fileName": "inline_js",
+                "extension": ".html"
             },
             {
                 "id": 2,
-                "name": "external_js.html"
+                "fileName": "external_js",
+                "extension": ".html"
             },
             {
                 "id": 3,
-                "name": "external.js"
+                "fileName": "external",
+                "extension": ".js"
             },
             {
                 "id": 4,
-                "name": "functions_js.html"
+                "fileName": "functions_js",
+                "extension": ".html"
             },
             {
                 "id": 5,
-                "name": "functions.js"
+                "fileName": "functions",
+                "extension": ".js"
             },
             {
                 "id": 6,
-                "name": "conditionals.html"
+                "fileName": "conditionals",
+                "extension": ".html"
             },
             {
                 "id": 7,
-                "name": "conditionals.js"
+                "fileName": "conditionals",
+                "extension": ".js"
             },
             {
                 "id": 8,
-                "name": "loops.html"
+                "fileName": "loops",
+                "extension": ".html"
             },
             {
                 "id": 9,
-                "name": "while.js"
+                "fileName": "while",
+                "extension": ".js"
             },
             {
                 "id": 10,
-                "name": "for_loops.js"
+                "fileName": "for_loops",
+                "extension": ".js"
             },
             {
                 "id": 11,
-                "name": "break_and_continue.js"
+                "fileName": "break_and_continue",
+                "extension": ".js"
             }
         ]
     },
     {
-        "js_arrays": [
-            {
+        "category": "js_arrays",
+        "files": [{
                 "id": 0,
-                "name": "iterating_arrays_js.html"
+                "fileName": "iterating_arrays_js",
+                "extension": ".html"
             },
             {
                 "id": 1,
-                "name": "iterating.js"
+                "fileName": "iterating",
+                "extension": ".js"
             },
             {
                 "id": 2,
-                "name": "planets-js.html"
+                "fileName": "planets-js",
+                "extension": ".html"
             },
             {
                 "id": 3,
-                "name": "planets-array.js"
+                "fileName": "planets-array",
+                "extension": ".js"
             },
             {
                 "id": 4,
-                "name": "split-join.html"
+                "fileName": "split-join",
+                "extension": ".html"
             },
             {
                 "id": 5,
-                "name": "planets-string.js"
+                "fileName": "planets-string",
+                "extension": ".js"
             }
         ]
     },
     {
-        "js_objects": [
-            {
+        "category": "js_objects",
+        "files": [{
                 "id": 0,
-                "name": "objects.html"
+                "fileName": "objects",
+                "extension": ".html"
             },
             {
                 "id": 1,
-                "name": "objects.js"
+                "fileName": "objects",
+                "extension": ".js"
             },
             {
                 "id": 2,
-                "name": "math-js.html"
+                "fileName": "math-js",
+                "extension": ".html"
             },
             {
                 "id": 3,
-                "name": "circle.js"
+                "fileName": "circle",
+                "extension": ".js"
             }
         ]
     },
     {
-        "bom_dom": [
-            {
+        "category": "bom_dom",
+        "files": [{
                 "id": 0,
-                "name": "defuse-the-bom.html"
+                "fileName": "defuse-the-bom",
+                "extension": ".html"
             },
             {
                 "id": 1,
-                "name": "dom-query-js.html"
+                "fileName": "dom-query-js",
+                "extension": ".html"
             },
             {
                 "id": 2,
-                "name": "google_maps_api.html"
+                "fileName": "google_maps_api",
+                "extension": ".html"
             }
         ]
     },
     {
-        "jquery": [
-            {
+        "category": "jquery",
+        "files": [{
                 "id": 0,
-                "name": "jquery_exercises.html"
+                "fileName": "jquery_exercises",
+                "extension": ".html"
             },
             {
                 "id": 1,
-                "name": "konami.html"
+                "fileName": "konami",
+                "extension": ".html"
             },
             {
                 "id": 2,
-                "name": "jquery_faq.html"
+                "fileName": "jquery_faq",
+                "extension": ".html"
             }
         ]
     },
     {
-        "ajax": [
-            {
+        "category": "ajax",
+        "files": [{
                 "id": 0,
-                "name": "ajax-store.html"
+                "fileName": "ajax-store",
+                "extension": ".html"
             },
             {
                 "id": 1,
-                "name": "inventory.json"
+                "fileName": "inventory",
+                "extension": ".json"
             },
             {
                 "id": 2,
-                "name": "ajax-blog.html"
+                "fileName": "ajax-blog",
+                "extension": ".html"
             },
             {
                 "id": 3,
-                "name": "blog.json"
+                "fileName": "blog",
+                "extension": ".json"
             },
             {
                 "id": 4,
-                "name": "weather_map.html"
+                "fileName": "weather_map",
+                "extension": ".html"
             }
         ]
     },
     {
-        "js_two": [
-            {
+        "category": "js_2",
+        "files": [{
                 "id": 0,
-                "name": "es6.js"
+                "fileName": "es6",
+                "extension": ".js"
             },
             {
                 "id": 1,
-                "name": "map-filter-reduce.js"
+                "fileName": "map-filter-reduce",
+                "extension": ".js"
             },
             {
                 "id": 2,
-                "name": "promises.js"
+                "fileName": "promises",
+                "extension": ".js"
             }
         ]
     },
     {
-        "java_1": [
-            {
+        "category": "java_1",
+        "files": [{
                 "id": 0,
-                "name": "HelloWorld.java"
+                "fileName": "HelloWorld",
+                "extension": ".java"
             },
             {
                 "id": 1,
-                "name": "ConsoleExercises.java"
+                "fileName": "ConsoleExercises",
+                "extension": ".java"
             },
             {
                 "id": 2,
-                "name": "ControlFlowExercises.java"
+                "fileName": "ControlFlowExercises",
+                "extension": ".java"
             },
             {
                 "id": 3,
-                "name": "StringExercise.java"
+                "fileName": "StringExercise",
+                "extension": ".java"
             },
             {
                 "id": 4,
-                "name": "MethodsExercises.java"
+                "fileName": "MethodsExercises",
+                "extension": ".java"
             },
             {
                 "id": 5,
-                "name": "HighLow.java"
+                "fileName": "HighLow",
+                "extension": ".java"
             }
         ]
     },
     {
-        "java_2": [
-            {
+        "category": "java_2",
+        "files": [{
                 "id": 0,
-                "name": "Person.java"
+                "fileName": "Person",
+                "extension": ".java"
             },
             {
                 "id": 1,
-                "name": "Input.java"
+                "fileName": "Input",
+                "extension": ".java"
             },
             {
                 "id": 2,
-                "name": "Circle.java"
+                "fileName": "Circle",
+                "extension": ".java"
             },
             {
                 "id": 3,
-                "name": "CircleApp.java"
+                "fileName": "CircleApp",
+                "extension": ".java"
             },
             {
                 "id": 4,
-                "name": "ServerNameGenerator.java"
+                "fileName": "ServerNameGenerator",
+                "extension": ".java"
             },
             {
                 "id": 5,
-                "name": "Movie.java"
+                "fileName": "Movie",
+                "extension": ".java"
             },
             {
                 "id": 6,
-                "name": "MoviesArray.java"
+                "fileName": "MoviesArray",
+                "extension": ".java"
             },
             {
                 "id": 7,
-                "name": "MoviesApplication.java"
+                "fileName": "MoviesApplication",
+                "extension": ".java"
             },
             {
                 "id": 8,
-                "name": "Rectangle.java"
+                "fileName": "Rectangle",
+                "extension": ".java"
             },
             {
                 "id": 9,
-                "name": "Square.java"
+                "fileName": "Square",
+                "extension": ".java"
             },
             {
                 "id": 10,
-                "name": "ShapesTest.java"
+                "fileName": "ShapesTest",
+                "extension": ".java"
             },
             {
                 "id": 11,
-                "name": "Shape.java"
+                "fileName": "Shape",
+                "extension": ".java"
             },
             {
                 "id": 12,
-                "name": "Measurable.java"
+                "fileName": "Measurable",
+                "extension": ".java"
             },
             {
                 "id": 13,
-                "name": "Quadrilateral.java"
+                "fileName": "Quadrilateral",
+                "extension": ".java"
             },
             {
                 "id": 14,
-                "name": "Student.java"
+                "fileName": "Student",
+                "extension": ".java"
             },
             {
                 "id": 15,
-                "name": "GradesApplication.java"
+                "fileName": "GradesApplication",
+                "extension": ".java"
             }
         ]
     },
     {
-        "sql": [
-            {
+        "category": "sql",
+        "files": [{
                 "id": 0,
-                "name": "albums_migration.sql"
+                "fileName": "albums_migration",
+                "extension": ".sql"
             },
             {
                 "id": 1,
-                "name": "albums_seeder.sql"
+                "fileName": "albums_seeder",
+                "extension": ".sql"
             },
             {
                 "id": 2,
-                "name": "aliases_exercises.sql"
+                "fileName": "aliases_exercises",
+                "extension": ".sql"
             },
             {
                 "id": 3,
-                "name": "delete_exercises.sql"
+                "fileName": "delete_exercises",
+                "extension": ".sql"
             },
             {
                 "id": 4,
-                "name": "functions_exercises.sql"
+                "fileName": "functions_exercises",
+                "extension": ".sql"
             },
             {
                 "id": 5,
-                "name": "group_by_exercises.sql"
+                "fileName": "group_by_exercises",
+                "extension": ".sql"
             },
             {
                 "id": 6,
-                "name": "join_exercises.sql"
+                "fileName": "join_exercises",
+                "extension": ".sql"
             },
             {
                 "id": 7,
-                "name": "limit_exercises.sql"
+                "fileName": "limit_exercises",
+                "extension": ".sql"
             },
             {
                 "id": 8,
-                "name": "order_by_exercises.sql"
+                "fileName": "order_by_exercises",
+                "extension": ".sql"
             },
             {
                 "id": 9,
-                "name": "select_exercises.sql"
+                "fileName": "select_exercises",
+                "extension": ".sql"
             },
             {
                 "id": 10,
-                "name": "subqueries_exercises.sql"
+                "fileName": "subqueries_exercises",
+                "extension": ".sql"
             },
             {
                 "id": 11,
-                "name": "update_exercises.sql"
+                "fileName": "update_exercises",
+                "extension": ".sql"
             },
             {
                 "id": 12,
-                "name": "where_exercises.sql"
+                "fileName": "where_exercises",
+                "extension": ".sql"
             }
         ]
     }
