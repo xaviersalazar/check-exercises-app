@@ -5,7 +5,7 @@ const $ = require('jquery')
 const ScrollMagic = require('scrollmagic')
 // const BrowserWindow = electron.remote.BrowserWindow
 const Typed = require('typed.js')
-const masterClassList = require('../assets/js/exercises_list.json')
+const masterList = require('../assets/js/exercises_list.json')
 /*
 ********************
 Global DOM variables
@@ -20,12 +20,19 @@ const exercisesBtn = document.querySelector('#check-exercises')
 DOM Animation Variables
 ***********************
 */
-const frames = [
-    {opacity: 0, easing: 'ease-in'},
-    {opacity: 0.5, easing: 'ease-out'},
-    {opacity: 1},
-  ]
-  
+const frames = [{
+        opacity: 0,
+        easing: 'ease-in'
+    },
+    {
+        opacity: 0.5,
+        easing: 'ease-out'
+    },
+    {
+        opacity: 1
+    },
+]
+
 const options = {
     duration: 2500,
     iterations: 2,
@@ -35,7 +42,7 @@ const options = {
     delay: 0,
     fill: 'forwards',
     easing: 'ease-in-out'
-  }
+}
 /*
 ********************
 API Helper Functions
@@ -48,20 +55,27 @@ async function getUserExercises(githubName) {
         `https://api.github.com/repos/${githubName}/codeup-web-exercises/contents/js/`,
         `https://api.github.com/repos/${githubName}/codeup-java-exercises/contents/`,
     ]
-     
-        const exerciseRepos = await Promise.all(exerciseURLs.map(
-            async url => {
-                let response = await fetch(url)
-                if(response.status == 200) {
-                    return await response.json()
-                }else{
-                    showErrorMsg(response.statusText)
-                }
+
+    const exerciseRepos = await Promise.all(exerciseURLs.map( async url => {
+            let response = await fetch(url)
+            if (response.status == 200) {
+                return await response.json()
+            } else {
+                showErrorMsg(response.statusText)
             }
-        ))
-       const data = exerciseRepos.map( repo => repo.map( file => ({name: file.name, path: file.path}) ))
-       console.log(data)
+        }
+    ))
+
+    // Filter out files by .extension
+    const htmlFiles = exerciseRepos[0].filter( ({name}) => name.endsWith(".html")).map( file => file.name)
+    const cssFiles  = exerciseRepos[1].filter( ({name}) => name.endsWith(".css") ).map( file => file.name)
+    const jsFiles   = exerciseRepos[2].filter( ({name}) => name.endsWith(".js")  ).map( file => file.name)
+
+    const files = htmlFiles.concat(cssFiles, jsFiles)
+    console.log(files)
+    files
 }
+
 
 
 /*
@@ -96,10 +110,10 @@ const scrollMagic = () => {
     // Add panels to the controller
     for (let slide of slides) {
         new ScrollMagic.Scene({
-            triggerElement: slide
-        })
-        .setPin(slide)
-        .addTo(controller)
+                triggerElement: slide
+            })
+            .setPin(slide)
+            .addTo(controller)
     }
 }
 
@@ -118,27 +132,18 @@ const getData = (githubName) => {
     // Make sure we get the data first
     $.when(getAjax(mainUrl), getAjax(cssUrl), getAjax(jsUrl)).then((html, css, js) => {
 
-        // Filter out files by .extension
-        const filter = (arr, ext) => {
-            arr.filter(item => {
-                if (item.name.endsWith(ext))
-                    files.push(item.name)
-            })
-        }
 
-        filter(html[0], '.html')
-        filter(css[0], '.css')
-        filter(js[0], '.js')
-
-        missing(files)
+        // missing(files)
     })
 
     // Check for missing exercises
     const missing = (exercises) => {
 
         // Difference helper method
-        Array.prototype.diff = function(a) {
-            return this.filter(function(i) {return a.indexOf(i) < 0})
+        Array.prototype.diff = function (a) {
+            return this.filter(function (i) {
+                return a.indexOf(i) < 0
+            })
         }
 
         // Filter out files by extension
@@ -155,7 +160,7 @@ const getData = (githubName) => {
         }
 
         // Master array of all exercises from curriculum
-        const allExercises = []//fetch data from JSON file
+        const allExercises = [] //fetch data from JSON file
 
         // Find missing exercises
         const missing = allExercises.diff(exercises)
@@ -208,57 +213,55 @@ const showMissing = (all) => {
 }
 
 // Display and animate error message
-function showErrorMsg(msg){
-    
-    const errorMessages = [
-        {
+function showErrorMsg(msg) {
+
+    const errorMessages = [{
             id: 1,
             message: "you didn't enter a github name",
             type: "empty"
         },
         {
             id: 2,
-            message: "The Github user: "+ userNameInput.value + " does not appear to have a codeup-web-exercises repo. Check your username spelling.",
+            message: "The Github user: " + userNameInput.value + " does not appear to have a codeup-web-exercises repo. Check your username spelling.",
             type: "Not Found"
         }
-   ]
-    errorMessages.map( errMsg => {
-        if (msg === errMsg.type){
+    ]
+    errorMessages.map(errMsg => {
+        if (msg === errMsg.type) {
             errorMsgInput.innerHTML = errMsg.message
             errorMsgInput
                 .animate(frames, options)
-                .finished.then( () => {
-                    errorMsgInput.animate(frames,options)
+                .finished.then(() => {
+                    errorMsgInput.animate(frames, options)
                 })
         }
     })
 }
 
-window.addEventListener("load", function() {
- /***************
-Event Handlers
-***************/
-exercisesBtn.addEventListener('click', function() {
-    if( userNameInput.value === '' ){
-        showErrorMsg("empty")
-    }else {
-       // Attempt the ajax request
-       getUserExercises(userNameInput.value)
-    }
-})
-
-userNameInput.addEventListener("keyup", function(event) {
-    if(event.key === "Enter"){   
+window.addEventListener("load", function () {
+    /***************
+    Event Handlers
+    ***************/
+    exercisesBtn.addEventListener('click', function () {
         if (userNameInput.value === '') {
             showErrorMsg("empty")
-        }
-        else {
+        } else {
             // Attempt the ajax request
-            getUserExercises(userNameInput.value)
+            getData(userNameInput.value)
         }
-    }
-})
-// ********************************************************
+    })
+
+    userNameInput.addEventListener("keyup", function (event) {
+        if (event.key === "Enter") {
+            if (userNameInput.value === '') {
+                showErrorMsg("empty")
+            } else {
+                // Attempt the ajax request
+                getUserExercises(userNameInput.value)
+            }
+        }
+    })
+    // ********************************************************
 
     typed()
 

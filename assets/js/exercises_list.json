@@ -14,7 +14,8 @@
     },
     {
         "category": "css_1",
-        "files": [{
+        "files": [
+            {
                 "id": 0,
                 "fileName": "style",
                 "extension": ".css"
