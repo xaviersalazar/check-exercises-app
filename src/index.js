@@ -21,16 +21,16 @@ DOM Animation Variables
 ***********************
 */
 const frames = [{
-        opacity: 0,
-        easing: 'ease-in'
-    },
-    {
-        opacity: 0.5,
-        easing: 'ease-out'
-    },
-    {
-        opacity: 1
-    },
+    opacity: 0,
+    easing: 'ease-in'
+},
+{
+    opacity: 0.5,
+    easing: 'ease-out'
+},
+{
+    opacity: 1
+},
 ]
 
 const options = {
@@ -56,8 +56,8 @@ async function getUserExercises(githubName) {
         `https://api.github.com/repos/${githubName}/codeup-java-exercises/contents/`,
     ]
 
-    const exerciseRepos = await Promise.all(exerciseURLs.map( async url => {
-            let response = await fetch(url)
+    const exerciseRepos = await Promise.all(exerciseURLs.map(async url => {
+        let response = await fetch(url)
             if (response.status == 200) {
                 return await response.json()
             } else {
@@ -67,13 +67,14 @@ async function getUserExercises(githubName) {
     ))
 
     // Filter out files by .extension
-    const htmlFiles = exerciseRepos[0].filter( ({name}) => name.endsWith(".html")).map( file => file.name)
-    const cssFiles  = exerciseRepos[1].filter( ({name}) => name.endsWith(".css") ).map( file => file.name)
-    const jsFiles   = exerciseRepos[2].filter( ({name}) => name.endsWith(".js")  ).map( file => file.name)
+    const htmlFiles = exerciseRepos[0].filter(({ name }) => name.endsWith(".html")).map(file => file.name)
+    const cssFiles = exerciseRepos[1].filter(({ name }) => name.endsWith(".css")).map(file => file.name)
+    const jsFiles = exerciseRepos[2].filter(({ name }) => name.endsWith(".js")).map(file => file.name)
 
-    const files = htmlFiles.concat(cssFiles, jsFiles)
-    console.log(files)
-    files
+    const allFiles = htmlFiles.concat(cssFiles, jsFiles)
+    
+    // Show the missing exercises
+
 }
 
 
@@ -83,6 +84,83 @@ async function getUserExercises(githubName) {
 Business Logic
 **************
 */
+
+function getMissingExercises(exercisesArr) {
+
+    // Difference helper method
+    Array.prototype.diff = function (a) {
+        return this.filter(function (i) {
+            return a.indexOf(i) < 0
+        })
+    }
+
+    // Filter out files by extension
+    const filterFiles = (arr, newArr) => {
+        const ext = ['.html', '.css', '.js', '.java', '.sql']
+        for (let e of ext) {
+            let temp = []
+            arr.filter(item => {
+                if (item.endsWith(e))
+                    temp.push(item)
+            })
+            newArr.push(temp)
+        }
+    }
+
+
+    // Master array of all exercises from curriculum
+    const allExercises = masterList.reduce((acc, category) =>
+        acc.concat(category.files.map(file =>
+            file.fileName.concat(file.extension))), [])
+
+    // Find missing exercises using ES7 
+    // https://stackoverflow.com/questions/1187518/how-to-get-the-difference-between-two-arrays-in-javascript
+    const missingExercises = allExercises.filter(file => !exercises.includes(file))
+
+    // Show no missing files if not missing any, else show files
+    
+    if (missingExercises.length === 0) {
+        document.getElementById('get-repo').style.display = "none"
+        document.getElementById('no-missing').style.display = "inline-block"
+    } else {
+        document.getElementById('get-repo').style.display = "none"
+        document.getElementById('missing').style.display = "inline-block"
+
+        const missingByExt = []
+        filterFiles(missingExercises, missingByExt)
+        showMissing(missingByExt)
+    }
+}
+
+function displayMissingExercises(files){
+    
+    // Create the div
+        const createExercise = (arr, selector) => {
+            for (let item of arr) {
+                let exerciseHtml = (
+                    '<div class="col-6">' +
+                    '<h5 class="text-center">' + item + '</h5>' +
+                    '</div>'
+                )
+                selector.append(exerciseHtml)
+            }
+        }
+
+        const rows = [$('#html'), $('#css'), $('#js'), $('#java'), $('#sql')]
+        const selectors = [$('#html-row:last'), $('#css-row:last'), $('#js-row:last'), $('#java-row:last'), $('#sql-row:last')]
+
+        // Only create div if you have missing items
+        for (let ext of all) {
+            if (ext.length === 0)
+                rows[all.indexOf(ext)].remove()
+            else
+                createExercise(ext, selectors[all.indexOf(ext)])
+        }
+
+        // Animations
+        scrollMagic()
+        document.getElementById('arrow').animate({ opacity: 1}, 5000)
+}
 
 // Typed.js
 const typed = () => {
@@ -96,7 +174,7 @@ const typed = () => {
 }
 
 // ScrollMagic Scene
-const scrollMagic = () => {
+function scrollMagic() {
     // Main controller for ScrollMagic
     let controller = new ScrollMagic.Controller({
         globalSceneOptions: {
@@ -110,121 +188,27 @@ const scrollMagic = () => {
     // Add panels to the controller
     for (let slide of slides) {
         new ScrollMagic.Scene({
-                triggerElement: slide
-            })
+            triggerElement: slide
+        })
             .setPin(slide)
             .addTo(controller)
     }
 }
 
-// Get our repo files
-const getData = (githubName) => {
-    // Return ajax response
-    const getAjax = (url) => {
-        return $.ajax(url)
-    }
-
-    const mainUrl = `https://api.github.com/repos/${githubName}/codeup-web-exercises/contents/`
-    const cssUrl = `https://api.github.com/repos/${githubName}/codeup-web-exercises/contents/css/`
-    const jsUrl = `https://api.github.com/repos/${githubName}/codeup-web-exercises/contents/js/`
-    let files = []
-
-    // Make sure we get the data first
-    $.when(getAjax(mainUrl), getAjax(cssUrl), getAjax(jsUrl)).then((html, css, js) => {
-
-
-        // missing(files)
-    })
-
-    // Check for missing exercises
-    const missing = (exercises) => {
-
-        // Difference helper method
-        Array.prototype.diff = function (a) {
-            return this.filter(function (i) {
-                return a.indexOf(i) < 0
-            })
-        }
-
-        // Filter out files by extension
-        const filter = (arr, newArr) => {
-            const ext = ['.html', '.css', '.js', '.java', '.sql']
-            for (let e of ext) {
-                let temp = []
-                arr.filter(item => {
-                    if (item.endsWith(e))
-                        temp.push(item)
-                })
-                newArr.push(temp)
-            }
-        }
-
-        // Master array of all exercises from curriculum
-        const allExercises = [] //fetch data from JSON file
-
-        // Find missing exercises
-        const missing = allExercises.diff(exercises)
-
-        // Show no missing files if not missing any, else show files
-        if (missing.length === 0) {
-            $('#get-repo').css('display', 'none')
-            $('#no-missing').css('display', 'inline-block')
-        } else {
-            $('#get-repo').css('display', 'none')
-            $('#missing').css('display', 'inline-block')
-
-            const missingByExt = []
-            filter(missing, missingByExt)
-            showMissing(missingByExt)
-        }
-    }
-}
-
-// Show the missing exercises
-const showMissing = (all) => {
-    // Create the div
-    const create = (arr, selector) => {
-        for (let item of arr) {
-            let div = (
-                '<div class="col-6">' +
-                '<h5 class="text-center">' + item + '</h5>' +
-                '</div>'
-            )
-            selector.append(div)
-        }
-    }
-
-    const rows = [$('#html'), $('#css'), $('#js'), $('#java'), $('#sql')]
-    const selectors = [$('#html-row:last'), $('#css-row:last'), $('#js-row:last'), $('#java-row:last'), $('#sql-row:last')]
-
-    // Only create div if you have missing items
-    for (let ext of all) {
-        if (ext.length === 0)
-            rows[all.indexOf(ext)].remove()
-        else
-            create(ext, selectors[all.indexOf(ext)])
-    }
-
-    // Animations
-    scrollMagic()
-    $('#arrow').animate({
-        opacity: 1
-    }, 5000)
-}
 
 // Display and animate error message
 function showErrorMsg(msg) {
 
     const errorMessages = [{
-            id: 1,
-            message: "you didn't enter a github name",
-            type: "empty"
-        },
-        {
-            id: 2,
-            message: "The Github user: " + userNameInput.value + " does not appear to have a codeup-web-exercises repo. Check your username spelling.",
-            type: "Not Found"
-        }
+        id: 1,
+        message: "you didn't enter a github name",
+        type: "empty"
+    },
+    {
+        id: 2,
+        message: "The Github user: " + userNameInput.value + " does not appear to have a codeup-web-exercises repo. Check your username spelling.",
+        type: "Not Found"
+    }
     ]
     errorMessages.map(errMsg => {
         if (msg === errMsg.type) {
