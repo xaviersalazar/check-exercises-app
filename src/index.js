@@ -53,7 +53,11 @@ async function getUserExercises(githubName) {
         `https://api.github.com/repos/${githubName}/codeup-web-exercises/contents/`,
         `https://api.github.com/repos/${githubName}/codeup-web-exercises/contents/css/`,
         `https://api.github.com/repos/${githubName}/codeup-web-exercises/contents/js/`,
-        `https://api.github.com/repos/${githubName}/codeup-java-exercises/contents/`,
+        `https://api.github.com/repos/${githubName}/codeup-java-exercises/contents/src/`,
+        `https://api.github.com/repos/${githubName}/codeup-java-exercises/contents/src/Shapes/`,
+        `https://api.github.com/repos/${githubName}/codeup-java-exercises/contents/src/movies/`,
+        `https://api.github.com/repos/${githubName}/codeup-java-exercises/contents/src/util/`,
+        `https://api.github.com/repos/${githubName}/codeup-java-exercises/contents/src/grades/`,
     ]
 
     const exerciseRepos = await Promise.all(exerciseURLs.map(async url => {
@@ -70,11 +74,16 @@ async function getUserExercises(githubName) {
     const htmlFiles = exerciseRepos[0].filter(({ name }) => name.endsWith(".html")).map(file => file.name)
     const cssFiles = exerciseRepos[1].filter(({ name }) => name.endsWith(".css")).map(file => file.name)
     const jsFiles = exerciseRepos[2].filter(({ name }) => name.endsWith(".js")).map(file => file.name)
+    const javaFilesSrc = exerciseRepos[3].filter(({ name }) => name.endsWith(".java")).map(file => file.name)
+    const javaFilesShapes = exerciseRepos[4].filter(({ name }) => name.endsWith(".java")).map(file => file.name)
+    const javaFilesMovies = exerciseRepos[5].filter(({ name }) => name.endsWith(".java")).map(file => file.name)
+    const javaFilesUtil = exerciseRepos[6].filter(({ name }) => name.endsWith(".java")).map(file => file.name)
+    const javaFilesGrades = exerciseRepos[7].filter(({ name }) => name.endsWith(".java")).map(file => file.name)
 
-    const allFiles = htmlFiles.concat(cssFiles, jsFiles)
+    const allFiles = htmlFiles.concat(cssFiles, jsFiles, javaFilesSrc, javaFilesShapes, javaFilesMovies, javaFilesUtil, javaFilesGrades)
     
     // Show the missing exercises
-
+    getMissingExercises(allFiles)
 }
 
 
@@ -115,7 +124,7 @@ function getMissingExercises(exercisesArr) {
 
     // Find missing exercises using ES7 
     // https://stackoverflow.com/questions/1187518/how-to-get-the-difference-between-two-arrays-in-javascript
-    const missingExercises = allExercises.filter(file => !exercises.includes(file))
+    const missingExercises = allExercises.filter(file => !exercisesArr.includes(file))
 
     // Show no missing files if not missing any, else show files
     
@@ -128,7 +137,7 @@ function getMissingExercises(exercisesArr) {
 
         const missingByExt = []
         filterFiles(missingExercises, missingByExt)
-        showMissing(missingByExt)
+        displayMissingExercises(missingByExt)
     }
 }
 
@@ -150,11 +159,11 @@ function displayMissingExercises(files){
         const selectors = [$('#html-row:last'), $('#css-row:last'), $('#js-row:last'), $('#java-row:last'), $('#sql-row:last')]
 
         // Only create div if you have missing items
-        for (let ext of all) {
+        for (let ext of files) {
             if (ext.length === 0)
-                rows[all.indexOf(ext)].remove()
+                rows[files.indexOf(ext)].remove()
             else
-                createExercise(ext, selectors[all.indexOf(ext)])
+                createExercise(ext, selectors[files.indexOf(ext)])
         }
 
         // Animations
@@ -231,7 +240,7 @@ window.addEventListener("load", function () {
             showErrorMsg("empty")
         } else {
             // Attempt the ajax request
-            getData(userNameInput.value)
+            getUserExercises(userNameInput.value)
         }
     })
 
