@@ -22,6 +22,18 @@ footer {
     display: none;
 }
 
+.fa-eye {
+    position: absolute;
+    top: 15px;
+    left: 95%;
+}
+
+.fa-eye-slash {
+    position: absolute;
+    top: 15px;
+    left: 95%;
+}
+
 .exer-col {
     height: 100vh;
 }

@@ -12,9 +12,10 @@ Global DOM variables
 ********************
 */
 const userNameInput = document.querySelector("#repo")
+const passwordInput = document.querySelector('#pass')
+const showPassword = document.querySelector('#show')
 const errorMsgInput = document.querySelector("#errorMsg")
 const exercisesBtn = document.querySelector('#check-exercises')
-
 /*
 ***********************
 DOM Animation Variables
@@ -48,7 +49,8 @@ const options = {
 API Helper Functions
 ********************
 */
-async function getUserExercises(githubName) {
+async function getUserExercises(githubName, githubPassword) {
+    const auth = 'Basic ' + new Buffer(githubName + ':' + githubPassword).toString('base64')
     const exerciseURLs = [
         `https://api.github.com/repos/${githubName}/codeup-web-exercises/contents/`,
         `https://api.github.com/repos/${githubName}/codeup-web-exercises/contents/css/`,
@@ -61,7 +63,12 @@ async function getUserExercises(githubName) {
     ]
 
     const exerciseRepos = await Promise.all(exerciseURLs.map(async url => {
-        let response = await fetch(url)
+        let response = await fetch(url, {
+            headers: {
+                'Authorization': auth,
+                'User-Agent': 'check-exercises-app'
+            }
+        })
             if (response.status == 200) {
                 return await response.json()
             } else {
@@ -158,7 +165,7 @@ function displayMissingExercises(files){
         const rows = [$('#html'), $('#css'), $('#js'), $('#java'), $('#sql')]
         const selectors = [$('#html-row:last'), $('#css-row:last'), $('#js-row:last'), $('#java-row:last'), $('#sql-row:last')]
 
-        // Only create div if you have missing items
+    // Only create div if you have missing items
         for (let ext of files) {
             if (ext.length === 0)
                 rows[files.indexOf(ext)].remove()
@@ -174,7 +181,7 @@ function displayMissingExercises(files){
 // Typed.js
 const typed = () => {
     new Typed('#typed1', {
-        strings: ['enter your github username'],
+        strings: ['enter your github username and password'],
         typeSpeed: 75,
         backSpeed: 50,
         backDelay: 2000,
@@ -211,12 +218,22 @@ function showErrorMsg(msg) {
     const errorMessages = [{
         id: 1,
         message: "you didn't enter a github name",
-        type: "empty"
+        type: "empty username"
     },
     {
         id: 2,
-        message: "The Github user: " + userNameInput.value + " does not appear to have a codeup-web-exercises repo. Check your username spelling.",
+        message: "you didn't enter a password",
+        type: "empty password"
+    },
+    {
+        id: 3,
+        message: "the github user: " + userNameInput.value + " does not appear to have a codeup-web-exercises repo. check your username spelling",
         type: "Not Found"
+    },
+    {
+        id: 4,
+        message: "the password you entered is incorrect. please enter your correct github password",
+        type: "Unauthorized"
     }
     ]
     errorMessages.map(errMsg => {
@@ -235,22 +252,38 @@ window.addEventListener("load", function () {
     /***************
     Event Handlers
     ***************/
+    showPassword.addEventListener('click', function () {
+        if (passwordInput.type === 'password') {
+            passwordInput.type = 'text'
+            showPassword.classList.remove('fa-eye')
+            showPassword.classList.add('fa-eye-slash')
+        } else {
+            passwordInput.type = 'password'
+            showPassword.classList.remove('fa-eye-slash')
+            showPassword.classList.add('fa-eye')
+        }
+    })
+
     exercisesBtn.addEventListener('click', function () {
         if (userNameInput.value === '') {
-            showErrorMsg("empty")
+            showErrorMsg("empty username")
+        } else if (passwordInput.value === '') {
+            showErrorMsg("empty password")
         } else {
             // Attempt the ajax request
-            getUserExercises(userNameInput.value)
+            getUserExercises(userNameInput.value, passwordInput.value)
         }
     })
 
     userNameInput.addEventListener("keyup", function (event) {
         if (event.key === "Enter") {
             if (userNameInput.value === '') {
-                showErrorMsg("empty")
+                showErrorMsg("empty username")
+            } else if (passwordInput.value === '') {
+                showErrorMsg("empty password")
             } else {
                 // Attempt the ajax request
-                getUserExercises(userNameInput.value)
+                getUserExercises(userNameInput.value, passwordInput.value)
             }
         }
     })

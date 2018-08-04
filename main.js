@@ -38,13 +38,6 @@ function createWindow () {
             label: 'Menu',
             submenu: [
                 {
-                    label: 'Authenticate with Github',
-                    click() {
-                        shell.openExternal('https://github.com')
-                    }
-                },
-                {type: 'separator'},
-                {
                     label: 'Exit',
                     click() {
                         app.quit()
