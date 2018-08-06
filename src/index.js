@@ -56,7 +56,7 @@ async function getUserExercises(githubName, githubPassword) {
         `https://api.github.com/repos/${githubName}/codeup-web-exercises/contents/css/`,
         `https://api.github.com/repos/${githubName}/codeup-web-exercises/contents/js/`,
         `https://api.github.com/repos/${githubName}/codeup-java-exercises/contents/src/`,
-        `https://api.github.com/repos/${githubName}/codeup-java-exercises/contents/src/Shapes/`,
+        `https://api.github.com/repos/${githubName}/codeup-java-exercises/contents/src/shapes/`,
         `https://api.github.com/repos/${githubName}/codeup-java-exercises/contents/src/movies/`,
         `https://api.github.com/repos/${githubName}/codeup-java-exercises/contents/src/util/`,
         `https://api.github.com/repos/${githubName}/codeup-java-exercises/contents/src/grades/`,
