@@ -60,6 +60,7 @@ async function getUserExercises(githubName, githubPassword) {
         `https://api.github.com/repos/${githubName}/codeup-java-exercises/contents/src/movies/`,
         `https://api.github.com/repos/${githubName}/codeup-java-exercises/contents/src/util/`,
         `https://api.github.com/repos/${githubName}/codeup-java-exercises/contents/src/grades/`,
+        `https://api.github.com/repos/${githubName}/database-exercises/contents/`
     ]
 
     const exerciseRepos = await Promise.all(exerciseURLs.map(async url => {
@@ -86,9 +87,10 @@ async function getUserExercises(githubName, githubPassword) {
     const javaFilesMovies = exerciseRepos[5].filter(({ name }) => name.endsWith(".java")).map(file => file.name)
     const javaFilesUtil = exerciseRepos[6].filter(({ name }) => name.endsWith(".java")).map(file => file.name)
     const javaFilesGrades = exerciseRepos[7].filter(({ name }) => name.endsWith(".java")).map(file => file.name)
+    const sqlFiles = exerciseRepos[8].filter(({ name }) => name.endsWith(".sql")).map(file => file.name)
 
-    const allFiles = htmlFiles.concat(cssFiles, jsFiles, javaFilesSrc, javaFilesShapes, javaFilesMovies, javaFilesUtil, javaFilesGrades)
-    
+    const allFiles = htmlFiles.concat(cssFiles, jsFiles, javaFilesSrc, javaFilesShapes, javaFilesMovies, javaFilesUtil, javaFilesGrades, sqlFiles)
+
     // Show the missing exercises
     getMissingExercises(allFiles)
 }
