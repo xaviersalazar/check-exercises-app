@@ -55,6 +55,7 @@ async function getUserExercises(githubName, githubPassword) {
         `https://api.github.com/repos/${githubName}/codeup-web-exercises/contents/`,
         `https://api.github.com/repos/${githubName}/codeup-web-exercises/contents/css/`,
         `https://api.github.com/repos/${githubName}/codeup-web-exercises/contents/js/`,
+        `https://api.github.com/repos/${githubName}/codeup-web-exercises/contents/data`,
         `https://api.github.com/repos/${githubName}/codeup-java-exercises/contents/src/`,
         `https://api.github.com/repos/${githubName}/codeup-java-exercises/contents/src/shapes/`,
         `https://api.github.com/repos/${githubName}/codeup-java-exercises/contents/src/movies/`,
@@ -78,18 +79,27 @@ async function getUserExercises(githubName, githubPassword) {
         }
     ))
 
+    // Testing out a new filter
+    const filterThoseFiles = (repo) => {
+        console.log(repo)
+    }
+
     // Filter out files by .extension
     const htmlFiles = exerciseRepos[0].filter(({ name }) => name.endsWith(".html")).map(file => file.name)
     const cssFiles = exerciseRepos[1].filter(({ name }) => name.endsWith(".css")).map(file => file.name)
     const jsFiles = exerciseRepos[2].filter(({ name }) => name.endsWith(".js")).map(file => file.name)
-    const javaFilesSrc = exerciseRepos[3].filter(({ name }) => name.endsWith(".java")).map(file => file.name)
-    const javaFilesShapes = exerciseRepos[4].filter(({ name }) => name.endsWith(".java")).map(file => file.name)
-    const javaFilesMovies = exerciseRepos[5].filter(({ name }) => name.endsWith(".java")).map(file => file.name)
-    const javaFilesUtil = exerciseRepos[6].filter(({ name }) => name.endsWith(".java")).map(file => file.name)
-    const javaFilesGrades = exerciseRepos[7].filter(({ name }) => name.endsWith(".java")).map(file => file.name)
-    const sqlFiles = exerciseRepos[8].filter(({ name }) => name.endsWith(".sql")).map(file => file.name)
+    const jsonFiles = exerciseRepos[3].filter(({ name }) => name.endsWith(".json")).map(file => file.name)
+    const javaFilesSrc = exerciseRepos[4].filter(({ name }) => name.endsWith(".java")).map(file => file.name)
+    const javaFilesShapes = exerciseRepos[5].filter(({ name }) => name.endsWith(".java")).map(file => file.name)
+    const javaFilesMovies = exerciseRepos[6].filter(({ name }) => name.endsWith(".java")).map(file => file.name)
+    const javaFilesUtil = exerciseRepos[7].filter(({ name }) => name.endsWith(".java")).map(file => file.name)
+    const javaFilesGrades = exerciseRepos[8].filter(({ name }) => name.endsWith(".java")).map(file => file.name)
+    const sqlFiles = exerciseRepos[9].filter(({ name }) => name.endsWith(".sql")).map(file => file.name)
 
-    const allFiles = htmlFiles.concat(cssFiles, jsFiles, javaFilesSrc, javaFilesShapes, javaFilesMovies, javaFilesUtil, javaFilesGrades, sqlFiles)
+    const allFiles = htmlFiles.concat(cssFiles, jsFiles, jsonFiles, javaFilesSrc, javaFilesShapes, javaFilesMovies, javaFilesUtil, javaFilesGrades, sqlFiles)
+
+    // Test
+    const allFilesTest = filterThoseFiles(exerciseRepos)
 
     // Show the missing exercises
     getMissingExercises(allFiles)
@@ -134,7 +144,7 @@ function getMissingExercises(exercisesArr) {
     // Find missing exercises using ES7 
     // https://stackoverflow.com/questions/1187518/how-to-get-the-difference-between-two-arrays-in-javascript
     const missingExercises = allExercises.filter(file => !exercisesArr.includes(file))
-
+    console.log(missingExercises, missingExercises.length)
     // Show no missing files if not missing any, else show files
     
     if (missingExercises.length === 0) {
