@@ -51,6 +51,7 @@ API Helper Functions
 */
 async function getUserExercises(githubName, githubPassword) {
     const auth = 'Basic ' + new Buffer(githubName + ':' + githubPassword).toString('base64')
+
     const exerciseURLs = [
         `https://api.github.com/repos/${githubName}/codeup-web-exercises/contents/`,
         `https://api.github.com/repos/${githubName}/codeup-web-exercises/contents/css/`,
@@ -64,45 +65,51 @@ async function getUserExercises(githubName, githubPassword) {
         `https://api.github.com/repos/${githubName}/database-exercises/contents/`
     ]
 
-    const exerciseRepos = await Promise.all(exerciseURLs.map(async url => {
-        let response = await fetch(url, {
-            headers: {
-                'Authorization': auth,
-                'User-Agent': 'check-exercises-app'
-            }
-        })
-            if (response.status == 200) {
-                return await response.json()
+    const exerciseRepos = await Promise.all(exerciseURLs.map(async repo => {
+            let response = await fetch(repo, {
+                headers: {
+                    'Authorization': auth,
+                    'User-Agent': 'check-exercises-app'
+                }
+            })
+
+            if (response.status != 200) {
+                if (response.statusText == 'Not Found') {
+                    return null
+                } else {
+                    showErrorMsg(response.statusText)
+                }
             } else {
-                showErrorMsg(response.statusText)
+                return await response.json()
             }
         }
     ))
 
-    // Testing out a new filter
-    const filterThoseFiles = (repo) => {
-        console.log(repo)
+    const reposNotMissing = exerciseRepos.filter(Boolean)
+    let allMissingFiles = []
+
+    if (reposNotMissing.length === 0) {
+
+        showErrorMsg('no repos')
+    } else {
+
+        // Filter out files by .extension
+        allMissingFiles = [].concat(...reposNotMissing.map(repo => {
+            return repo.filter(({ name }) => {
+                if (name.endsWith('.html')
+                    || name.endsWith('.css')
+                    || name.endsWith('.js')
+                    || name.endsWith('.json')
+                    || name.endsWith('.java')
+                    || name.endsWith('.sql')) {
+                        return name
+                    }
+            }).map(file => file.name)
+        }))
     }
 
-    // Filter out files by .extension
-    const htmlFiles = exerciseRepos[0].filter(({ name }) => name.endsWith(".html")).map(file => file.name)
-    const cssFiles = exerciseRepos[1].filter(({ name }) => name.endsWith(".css")).map(file => file.name)
-    const jsFiles = exerciseRepos[2].filter(({ name }) => name.endsWith(".js")).map(file => file.name)
-    const jsonFiles = exerciseRepos[3].filter(({ name }) => name.endsWith(".json")).map(file => file.name)
-    const javaFilesSrc = exerciseRepos[4].filter(({ name }) => name.endsWith(".java")).map(file => file.name)
-    const javaFilesShapes = exerciseRepos[5].filter(({ name }) => name.endsWith(".java")).map(file => file.name)
-    const javaFilesMovies = exerciseRepos[6].filter(({ name }) => name.endsWith(".java")).map(file => file.name)
-    const javaFilesUtil = exerciseRepos[7].filter(({ name }) => name.endsWith(".java")).map(file => file.name)
-    const javaFilesGrades = exerciseRepos[8].filter(({ name }) => name.endsWith(".java")).map(file => file.name)
-    const sqlFiles = exerciseRepos[9].filter(({ name }) => name.endsWith(".sql")).map(file => file.name)
-
-    const allFiles = htmlFiles.concat(cssFiles, jsFiles, jsonFiles, javaFilesSrc, javaFilesShapes, javaFilesMovies, javaFilesUtil, javaFilesGrades, sqlFiles)
-
-    // Test
-    const allFilesTest = filterThoseFiles(exerciseRepos)
-
-    // Show the missing exercises
-    getMissingExercises(allFiles)
+    // // Show the missing exercises
+    getMissingExercises(allMissingFiles)
 }
 
 
@@ -239,8 +246,8 @@ function showErrorMsg(msg) {
     },
     {
         id: 3,
-        message: "the github user: " + userNameInput.value + " does not appear to have a codeup-web-exercises repo. check your username spelling",
-        type: "Not Found"
+        message: "the github user: " + userNameInput.value + " does not have any repos outlined in the codeup curriculum",
+        type: "no repos"
     },
     {
         id: 4,
