@@ -3,24 +3,17 @@ const electron = require('electron')
 const path = require('path')
 const $ = require('jquery')
 const ScrollMagic = require('scrollmagic')
-// const BrowserWindow = electron.remote.BrowserWindow
 const Typed = require('typed.js')
 const masterList = require('../assets/js/exercises_list.json')
-/*
-********************
-Global DOM variables
-********************
-*/
+
+/**** GLOBAL VARIABLES ****/
 const userNameInput = document.querySelector("#repo")
 const passwordInput = document.querySelector('#pass')
 const showPassword = document.querySelector('#show')
 const errorMsgInput = document.querySelector("#errorMsg")
 const exercisesBtn = document.querySelector('#check-exercises')
-/*
-***********************
-DOM Animation Variables
-***********************
-*/
+
+/**** ANIMATION VARIABLES ****/
 const frames = [{
     opacity: 0,
     easing: 'ease-in'
@@ -44,12 +37,9 @@ const options = {
     fill: 'forwards',
     easing: 'ease-in-out'
 }
-/*
-********************
-API Helper Functions
-********************
-*/
-async function getUserExercises(githubName, githubPassword) {
+
+/**** PULL USERS FILES ****/
+const getUserExercises = async (githubName, githubPassword) =>  {
     const auth = 'Basic ' + new Buffer(githubName + ':' + githubPassword).toString('base64')
 
     const exerciseURLs = [
@@ -89,10 +79,8 @@ async function getUserExercises(githubName, githubPassword) {
     let allMissingFiles = []
 
     if (reposNotMissing.length === 0) {
-
         showErrorMsg('no repos')
     } else {
-
         // Filter out files by .extension
         allMissingFiles = [].concat(...reposNotMissing.map(repo => {
             return repo.filter(({ name }) => {
@@ -108,19 +96,12 @@ async function getUserExercises(githubName, githubPassword) {
         }))
     }
 
-    // // Show the missing exercises
+    // Show the missing exercises
     getMissingExercises(allMissingFiles)
 }
 
-
-
-/*
-**************
-Business Logic
-**************
-*/
-
-function getMissingExercises(exercisesArr) {
+/**** FIND MISSING FILES ****/
+const getMissingExercises = (exercisesArr) => {
 
     // Difference helper method
     Array.prototype.diff = function (a) {
@@ -151,9 +132,8 @@ function getMissingExercises(exercisesArr) {
     // Find missing exercises using ES7 
     // https://stackoverflow.com/questions/1187518/how-to-get-the-difference-between-two-arrays-in-javascript
     const missingExercises = allExercises.filter(file => !exercisesArr.includes(file))
-    console.log(missingExercises, missingExercises.length)
+
     // Show no missing files if not missing any, else show files
-    
     if (missingExercises.length === 0) {
         document.getElementById('get-repo').style.display = "none"
         document.getElementById('no-missing').style.display = "inline-block"
@@ -167,9 +147,10 @@ function getMissingExercises(exercisesArr) {
     }
 }
 
-function displayMissingExercises(files){
+/**** SHOW MISSING FILES ****/
+const displayMissingExercises = (files) => {
     
-    // Create the div
+        // Create the div
         const createExercise = (arr, selector) => {
             for (let item of arr) {
                 let exerciseHtml = (
@@ -184,7 +165,7 @@ function displayMissingExercises(files){
         const rows = [$('#html'), $('#css'), $('#js'), $('#java'), $('#sql')]
         const selectors = [$('#html-row:last'), $('#css-row:last'), $('#js-row:last'), $('#java-row:last'), $('#sql-row:last')]
 
-    // Only create div if you have missing items
+        // Only create div if you have missing items
         for (let ext of files) {
             if (ext.length === 0)
                 rows[files.indexOf(ext)].remove()
@@ -209,7 +190,7 @@ const typed = () => {
 }
 
 // ScrollMagic Scene
-function scrollMagic() {
+const scrollMagic = () => {
     // Main controller for ScrollMagic
     let controller = new ScrollMagic.Controller({
         globalSceneOptions: {
@@ -231,8 +212,8 @@ function scrollMagic() {
 }
 
 
-// Display and animate error message
-function showErrorMsg(msg) {
+/**** HANDLE ERRORS ****/
+const showErrorMsg = (msg) => {
 
     const errorMessages = [{
         id: 1,
@@ -255,6 +236,7 @@ function showErrorMsg(msg) {
         type: "Unauthorized"
     }
     ]
+    
     errorMessages.map(errMsg => {
         if (msg === errMsg.type) {
             errorMsgInput.innerHTML = errMsg.message
@@ -267,11 +249,10 @@ function showErrorMsg(msg) {
     })
 }
 
-window.addEventListener("load", function () {
-    /***************
-    Event Handlers
-    ***************/
-    showPassword.addEventListener('click', function () {
+/**** EVENT HANDLERS ****/
+window.addEventListener("load", () => {
+
+    showPassword.addEventListener('click', () => {
         if (passwordInput.type === 'password') {
             passwordInput.type = 'text'
             showPassword.classList.remove('fa-eye')
@@ -283,25 +264,23 @@ window.addEventListener("load", function () {
         }
     })
 
-    exercisesBtn.addEventListener('click', function () {
+    exercisesBtn.addEventListener('click', () => {
         if (userNameInput.value === '') {
             showErrorMsg("empty username")
         } else if (passwordInput.value === '') {
             showErrorMsg("empty password")
         } else {
-            // Attempt the ajax request
             getUserExercises(userNameInput.value, passwordInput.value)
         }
     })
 
-    userNameInput.addEventListener("keyup", function (event) {
+    userNameInput.addEventListener("keyup", (event) => {
         if (event.key === "Enter") {
             if (userNameInput.value === '') {
                 showErrorMsg("empty username")
             } else if (passwordInput.value === '') {
                 showErrorMsg("empty password")
             } else {
-                // Attempt the ajax request
                 getUserExercises(userNameInput.value, passwordInput.value)
             }
         }
