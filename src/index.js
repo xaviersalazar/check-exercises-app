@@ -274,8 +274,19 @@ window.addEventListener("load", () => {
         }
     })
 
-    userNameInput.addEventListener("keyup", (event) => {
+    userNameInput.addEventListener("keydown", (event) => {
         if (event.key === "Enter") {
+            if (userNameInput.value === '') {
+                showErrorMsg("empty username")
+            } else if (passwordInput.value === '') {
+                showErrorMsg("empty password")
+            } else {
+                getUserExercises(userNameInput.value, passwordInput.value)
+            }
+        }
+    })
+    passwordInput.addEventListener('keydown', (event) =>{
+        if(event.key === "Enter"){
             if (userNameInput.value === '') {
                 showErrorMsg("empty username")
             } else if (passwordInput.value === '') {
